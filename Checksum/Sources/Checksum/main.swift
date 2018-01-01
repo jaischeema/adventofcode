@@ -23,8 +23,23 @@ func run() {
     }
 
     let result = input.reduce(into: 0) { sum, row in
-        if let max = row.max(), let min = row.min() {
-            sum += max - min
+        var matched = false
+        for (index, item) in row[...(row.count-1)].enumerated() {
+            for matchingItem in row[(index+1)...] {
+                if item % matchingItem == 0 {
+                    sum += (item / matchingItem)
+                    matched = true
+                    break
+                }
+                if matchingItem % item == 0 {
+                    sum += (matchingItem / item)
+                    matched = true
+                    break
+                }
+            }
+            if matched {
+                break
+            }
         }
     }
 
