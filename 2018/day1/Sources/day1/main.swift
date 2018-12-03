@@ -3,7 +3,7 @@ import Foundation
 enum Token {
     case addition(Int)
     case substraction(Int)
-    
+
     var value: Int {
         switch self {
         case .addition(let value):
@@ -40,7 +40,47 @@ func parse(filePath: String) throws -> [Token] {
         .map { try parse(input: $0) }
 }
 
-let inputFilePath = FileManager().currentDirectoryPath.appending("/input.txt")
-let tokens = try! parse(filePath: inputFilePath)
-let totalValue = tokens.reduce(0) { $0 + $1.value }
-print(totalValue)
+func generateFrequencies(startingAt: Int, with tokens: [Token]) -> LazyCollection<[Int]> {
+    return tokens
+        .lazy
+        .reduce([]) { $0 + [($0.last ?? startingAt) + $1.value] }
+        .lazy
+}
+
+func readAndParseFile() -> [Token] {
+    let inputFilePath = FileManager().currentDirectoryPath.appending("/input.txt")
+    return try! parse(filePath: inputFilePath)
+}
+
+func puzzle1() {
+    let frequencies = generateFrequencies(startingAt: 0, with: readAndParseFile())
+    guard let lastFrequency = frequencies.last else {
+        print("Empty input set")
+        return
+    }
+    print("Puzzle 1: \(lastFrequency)")
+}
+
+func puzzle2() {
+    let tokens = readAndParseFile()
+    let initialFrequencies = generateFrequencies(startingAt: 0, with: tokens)
+    guard let initialReducedFrequency = initialFrequencies.last else {
+        print("Empty input set")
+        return
+    }
+    
+    var startingValue = initialReducedFrequency
+    var matchingFrequency: Int? = nil
+    
+    while(matchingFrequency == nil) {
+        matchingFrequency = generateFrequencies(startingAt: startingValue, with: tokens).first { frequency in
+            startingValue = frequency
+            return initialFrequencies.contains(frequency)
+        }
+    }
+    
+    print("Puzzle 2: \(matchingFrequency ?? 0)")
+}
+
+puzzle1()
+puzzle2()
