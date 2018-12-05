@@ -1,10 +1,3 @@
-//
-//  Day2.swift
-//  2018
-//
-//  Created by Jais Cheema on 3/12/18.
-//
-
 import Foundation
 
 class Word {
@@ -49,30 +42,24 @@ extension Word: CustomStringConvertible {
     var description: String { return stringValue }
 }
 
-class Day2 {
-    func parse(filePath: String) throws -> [String] {
-        let fileContents = try String(contentsOfFile: filePath)
-        return fileContents
-            .components(separatedBy: "\n")
-            .filter { $0.count > 0 }
-    }
+class Day2: Day {
+    var day: Int { return 2 }
 
-    func readAndParseFile() -> [String] {
-        let inputFilePath = FileManager().currentDirectoryPath.appending("/inputs/day2/input.txt")
-        return try! parse(filePath: inputFilePath)
-    }
+    lazy var input: Input = { Input(day: 2) }()
+
+    lazy var words: [Word] = {
+        try! input.contents().map { Word($0) }
+    }()
+
+    required init() {}
 
     func puzzle1() {
-        let words = readAndParseFile().map { Word($0) }
-
         let twos = words.filter { $0.hasDoubleDigits }
         let threes = words.filter { $0.hasTripleDigits }
-        print("Checksum is \(twos.count * threes.count)")
+        print("\(twos.count * threes.count)")
     }
 
     func puzzle2() {
-        let words = readAndParseFile().map { Word($0) }
-
         let similarWords: [(Word, Word)] = words.enumerated().compactMap { element in
             let (index, word1) = element
 
@@ -87,7 +74,6 @@ class Day2 {
         guard let (originalWord, matchingWord) = similarWords.first,
             let indices = originalWord.differingIndices(word: matchingWord) else { return }
 
-        print("Matching words are: \(originalWord) & \(matchingWord)")
-        print("Common letters: \(originalWord.remove(indices: indices))")
+        print("\(originalWord.remove(indices: indices))")
     }
 }

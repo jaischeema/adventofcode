@@ -19,7 +19,17 @@ enum ParsingError: Error {
     case invalidValue
 }
 
-class Day1 {
+class Day1: Day {
+    lazy var input: Input = { Input(day: 1) }()
+
+    lazy var tokens: [Token] = {
+        try! input.contents().map { try parse(input: $0) }
+    }()
+
+    var day: Int { return 1 }
+
+    required init() {}
+
     func parse(input: String) throws -> Token {
         switch (input.first, Int(input.dropFirst())) {
         case let (.some("+"), .some(intValue)):
@@ -33,28 +43,15 @@ class Day1 {
         }
     }
 
-    func parse(filePath: String) throws -> [Token] {
-        let fileContents = try String(contentsOfFile: filePath)
-        return try fileContents
-            .components(separatedBy: "\n")
-            .filter { $0.count > 0 }
-            .map { try parse(input: $0) }
-    }
-
-    func generateFrequencies(startingAt: Int, with tokens: [Token]) -> LazyCollection<[Int]> {
+    func generateFrequencies(startingAt: Int) -> LazyCollection<[Int]> {
         return tokens
             .lazy
             .reduce([]) { $0 + [($0.last ?? startingAt) + $1.value] }
             .lazy
     }
 
-    func readAndParseFile() -> [Token] {
-        let inputFilePath = FileManager().currentDirectoryPath.appending("/inputs/day1/input.txt")
-        return try! parse(filePath: inputFilePath)
-    }
-
     func puzzle1() {
-        let frequencies = generateFrequencies(startingAt: 0, with: readAndParseFile())
+        let frequencies = generateFrequencies(startingAt: 0)
         guard let lastFrequency = frequencies.last else {
             print("Empty input set")
             return
@@ -63,8 +60,7 @@ class Day1 {
     }
 
     func puzzle2() {
-        let tokens = readAndParseFile()
-        let initialFrequencies = generateFrequencies(startingAt: 0, with: tokens)
+        let initialFrequencies = generateFrequencies(startingAt: 0)
         guard let initialReducedFrequency = initialFrequencies.last else {
             print("Empty input set")
             return
@@ -74,7 +70,7 @@ class Day1 {
         var matchingFrequency: Int?
 
         while matchingFrequency == nil {
-            matchingFrequency = generateFrequencies(startingAt: startingValue, with: tokens).first { frequency in
+            matchingFrequency = generateFrequencies(startingAt: startingValue).first { frequency in
                 startingValue = frequency
                 return initialFrequencies.contains(frequency)
             }
