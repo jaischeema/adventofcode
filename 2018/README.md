@@ -7,3 +7,9 @@ Solutions for year 2018
 ```bash
 $ swift run
 ```
+
+Only specific day
+
+```bash
+$ swift run 2018 -d 2 -p 1
+```
