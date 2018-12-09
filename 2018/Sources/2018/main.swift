@@ -3,6 +3,7 @@ import SwiftCLI
 let puzzles: [Int: Day.Type] = [
     1: Day1.self,
     2: Day2.self,
+    3: Day3.self,
 ]
 
 enum CliError: Error {
