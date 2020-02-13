@@ -25,3 +25,7 @@ end
 def fixture_file(day)
   File.join(__dir__, "./fixtures/#{day}.txt")
 end
+
+def input_file(day)
+  File.join(__dir__, "../inputs/#{day}.txt")
+end

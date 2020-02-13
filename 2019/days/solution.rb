@@ -2,13 +2,16 @@
 
 module Days
   class Solution
-    attr_reader :input_file_path
+    DEFAULT_OPTIONS = {}.freeze
 
-    def initialize(input_file_path: nil, input: nil)
-      raise 'Need to provide input_file_path or raw input' if input_file_path.nil? && input.nil?
+    attr_reader :input_file_path, :options
+
+    def initialize(input_file_path: nil, input: nil, options: {})
+      raise "Need to provide input_file_path or raw input" if input_file_path.nil? && input.nil?
 
       @input_file_path = input_file_path
       @input = input
+      @options = self.class::DEFAULT_OPTIONS.merge(options)
     end
 
     def solve_1
@@ -19,8 +22,17 @@ module Days
       raise NotImplementedError
     end
 
+    def input_preprocessor
+      options.fetch(:input_preprocessor, proc { |x| x })
+    end
+
+    def result_extractor
+      options.fetch(:result_extractor, proc { |x| x })
+    end
+
     def input
       return @input unless @input.nil?
+
       @input = File.readlines(input_file_path)
     end
   end

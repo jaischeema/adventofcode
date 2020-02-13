@@ -25,7 +25,7 @@ module Days
     def fuel_required_for_module_mass_recursive(value)
       values = []
       fuel_required = fuel_required_for_module_mass(value)
-      while fuel_required > 0
+      while fuel_required.positive?
         values << fuel_required
         fuel_required = fuel_required_for_module_mass(fuel_required)
       end
