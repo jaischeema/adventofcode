@@ -34,5 +34,12 @@ RSpec.describe Days::Day2 do
 
       it { is_expected.to eq([30, 1, 1, 4, 2, 5, 6, 0, 99]) }
     end
+
+    context "with solution input" do
+      let(:input_file_path) { input_file(2) }
+      let(:solver) { described_class.new(input_file_path: input_file_path) }
+
+      it { is_expected.to eq(4_945_026) }
+    end
   end
 end
