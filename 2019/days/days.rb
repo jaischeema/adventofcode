@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "solution"
+require_relative "solver"
+require_relative "executer"
 require_relative "day1"
 require_relative "day2"
