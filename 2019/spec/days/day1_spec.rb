@@ -3,9 +3,17 @@
 require "days"
 
 RSpec.describe Days::Day1 do
-  let(:solution) { described_class.new(fixture_file(1)) }
+  let(:solver) { described_class.new(fixture_file(1)) }
 
-  subject(:result) { solution.solve }
+  describe "#solve_1" do
+    subject(:result) { solver.solve_1 }
 
-  it { is_expected.to eq(34_241) }
+    it { is_expected.to eq(34_241) }
+  end
+
+  describe "#solve_2" do
+    subject(:result) { solver.solve_2 }
+
+    it { is_expected.to eq(51_316) }
+  end
 end

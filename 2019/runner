@@ -12,7 +12,12 @@ Clamp do
 
   def execute
     solution_class = Object.const_get("Days::Day#{day}")
-    puts solution_class.new(input_file_path(day)).solve
+    solver = solution_class.new(input_file_path(day))
+    puts "==========="
+    puts "Day #{day}"
+    puts "==========="
+    puts "1) #{solver.solve_1}"
+    puts "2) #{solver.solve_2}"
   rescue NameError
     signal_usage_error "Invalid Day #{day}"
   end

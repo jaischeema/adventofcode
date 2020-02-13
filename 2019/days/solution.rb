@@ -8,7 +8,11 @@ module Days
       @input_file_path = input_file_path
     end
 
-    def solve
+    def solve_1
+      raise NotImplementedError
+    end
+
+    def solve_2
       raise NotImplementedError
     end
 
