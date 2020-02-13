@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require "clamp"
+require_relative "days/days"
+
+Clamp do
+  option "--day", "DAY", "solution for day to run", required: true do |s|
+    Integer(s)
+  end
+
+  def execute
+    solution_class = Object.const_get("Days::Day#{day}")
+    puts solution_class.new(input_file_path(day)).solve
+  rescue NameError
+    signal_usage_error "Invalid Day #{day}"
+  end
+
+  def input_file_path(day)
+    File.join(__dir__, "./inputs/#{day}.txt")
+  end
+end

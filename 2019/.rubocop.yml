@@ -1,0 +1,8 @@
+Layout/LineLength:
+  Max: 100
+  IgnoredPatterns:
+    - '(\A\s*)#'
+Style/Documentation:
+  Enabled: false
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
