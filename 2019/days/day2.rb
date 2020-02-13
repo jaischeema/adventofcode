@@ -16,13 +16,23 @@ module Days
     EXIT_OP_CODE = 99
 
     def solve_1
-      program = input_preprocessor.call(parsed_input)
+      program = input_preprocessor.call(Array.new(parsed_input))
       program = execute_program(program)
       result_extractor.call(program)
     end
 
     def solve_2
-      "Not there yet"
+      original_program = parsed_input
+      (0...99).to_a.repeated_permutation(2).each do |noun, verb|
+        program = Array.new(original_program)
+        program[1] = noun
+        program[2] = verb
+        program = execute_program(program)
+
+        if program.first == 19_690_720
+          return 100 * noun + verb
+        end
+      end
     end
 
     private
