@@ -3,7 +3,7 @@
 require "days"
 
 RSpec.describe Days::Day1 do
-  let(:solver) { described_class.new(fixture_file(1)) }
+  let(:solver) { described_class.new(input_file_path: fixture_file(1)) }
 
   describe "#solve_1" do
     subject(:result) { solver.solve_1 }

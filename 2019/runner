@@ -12,7 +12,7 @@ Clamp do
 
   def execute
     solution_class = Object.const_get("Days::Day#{day}")
-    solver = solution_class.new(input_file_path(day))
+    solver = solution_class.new(input_file_path: input_file_path(day))
     puts "==========="
     puts "Day #{day}"
     puts "==========="
