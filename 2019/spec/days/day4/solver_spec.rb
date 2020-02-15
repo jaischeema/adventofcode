@@ -15,4 +15,12 @@ RSpec.describe Days::Day4::Solver do
 
     it { is_expected.to eq(expected_result) }
   end
+
+  describe "#solve_2" do
+    subject { solver.solve_2 }
+
+    let(:expected_result) { [111_111] }
+
+    it { is_expected.to eq(expected_result) }
+  end
 end

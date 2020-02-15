@@ -5,12 +5,10 @@ module Days
     class Executer < Days::Executer
       def solution_1
         solver.solve_1.count
-        # closed_point = solver.solve_1
-        # closed_point.x.abs + closed_point.y.abs
       end
 
       def solution_2
-        # solver.solve_2
+        solver.solve_2.count
       end
 
       def solver

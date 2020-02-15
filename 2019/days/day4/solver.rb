@@ -10,6 +10,9 @@ module Days
       end
 
       def solve_2
+        input.select do |value|
+          StricterPassword.new(value).valid?
+        end
       end
     end
   end
