@@ -18,7 +18,7 @@ RSpec.describe Days::Day3::Point do
 
     describe "equal" do
       specify do
-        expect(described_class.new(1, 2)).to eq(described_class.new(-2, -1))
+        expect(described_class.new(1, 2)).to eq(described_class.new(1, 2))
       end
     end
   end

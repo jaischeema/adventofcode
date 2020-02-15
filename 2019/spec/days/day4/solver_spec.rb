@@ -19,7 +19,10 @@ RSpec.describe Days::Day4::Solver do
   describe "#solve_2" do
     subject { solver.solve_2 }
 
-    let(:expected_result) { [111_111] }
+    let(:input) { 111_111...111_220 }
+    let(:expected_result) do
+      [111_122, 111_133, 111_144, 111_155, 111_166, 111_177, 111_188, 111_199]
+    end
 
     it { is_expected.to eq(expected_result) }
   end

@@ -39,7 +39,7 @@ RSpec.describe Days::Day3::Wire do
     context "scenario 1" do
       let(:point) { Days::Day3::Point.new(3, -3) }
 
-      it { is_expected.to eq(19) }
+      it { is_expected.to eq(20) }
     end
   end
 end
