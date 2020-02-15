@@ -9,6 +9,7 @@ module Days
       end
 
       def solution_2
+        solver.solve_2
       end
 
       def solver

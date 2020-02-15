@@ -17,6 +17,10 @@ module Days
                     end
                   end
       end
+
+      def steps(to:)
+        path.find_index(to) + 1
+      end
     end
   end
 end

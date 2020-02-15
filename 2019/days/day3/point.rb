@@ -10,6 +10,12 @@ module Days
 
         (x.abs + y.abs) <=> (other.x.abs + other.y.abs)
       end
+
+      def ==(other)
+        return false if other.nil?
+
+        x == other.x && y == other.y
+      end
     end
   end
 end

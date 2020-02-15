@@ -30,4 +30,16 @@ RSpec.describe Days::Day3::Wire do
 
     it { is_expected.to eq(points) }
   end
+
+  describe "#steps" do
+    let(:moves) { "R8,U5,L5,D3".split(",") }
+
+    subject { wire.steps(to: point) }
+
+    context "scenario 1" do
+      let(:point) { Days::Day3::Point.new(3, -3) }
+
+      it { is_expected.to eq(19) }
+    end
+  end
 end
